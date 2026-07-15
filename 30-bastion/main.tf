@@ -3,6 +3,7 @@ resource "aws_instance" "bastion" {
     instance_type = "t3.micro"
     vpc_security_group_ids = [local.bastion_sg_id]
     subnet_id = local.public_subnet_ids
+    iam_instance_profile = aws_iam_instance_profile.bastion.name
     user_data = templatefile("${path.module}/bastion.sh.tftpl", {
     partition_number = 4
     extend_size = 30

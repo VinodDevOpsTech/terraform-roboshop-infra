@@ -1,3 +1,4 @@
-output "vpc_id" {
-    value = "/${var.project}/${var.environment}/vpc_id"
-}
+/* output "mongodb_sg_id" {
+    count = length(var.sg_names)
+    value = module.sg[count.index].sg_id
+} */
