@@ -12,3 +12,29 @@ resource "aws_instance" "mongodb" {
         local.common_tags
 )
 }
+
+
+resource "terraform_data" "mongodb" {
+    triggers_replace = [
+        aws_instance.mongodb.id,
+    ]
+        
+    connection {
+        type = "ssh"
+        user = "ec2-user"
+        password = "DevOps123"
+        host = aws_instance.mongodb.private_ip
+        }
+
+    provisioner "file" {
+        source = "bootstrap.sh"
+        destination = "/tmp/bootstrap.sh/"
+        }
+
+    provisioner "remote-exec" {
+        inline = [
+        "chmod +x /tmp/bootstrap.sh",
+        "sudo sh /tmp/bootstrap.sh mongodb ${var.environment}"
+        ]
+    }
+    }
