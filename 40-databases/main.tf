@@ -28,7 +28,7 @@ resource "terraform_data" "mongodb" {
 
     provisioner "file" {
         source = "bootstrap.sh"
-        destination = "/tmp/bootstrap.sh/"
+        destination = "/tmp/bootstrap.sh"
         }
 
     provisioner "remote-exec" {
@@ -69,7 +69,7 @@ resource "terraform_data" "redis" {
 
     provisioner "file" {
         source = "bootstrap.sh"
-        destination = "/tmp/bootstrap.sh/"
+        destination = "/tmp/bootstrap.sh"
         }
 
     provisioner "remote-exec" {
@@ -84,7 +84,7 @@ resource "terraform_data" "redis" {
     ami = data.aws_ami.DevOps.id
     instance_type = "t3.micro"
     vpc_security_group_ids = [local.mysql_sg_id]
-    subnet_id = local.database_subnet_ids
+    subnet_id = local.database_subnet_ids[0]
     
     
     tags = merge(
@@ -110,7 +110,7 @@ resource "terraform_data" "mysql" {
 
     provisioner "file" {
         source = "bootstrap.sh"
-        destination = "/tmp/bootstrap.sh/"
+        destination = "/tmp/bootstrap.sh"
         }
 
     provisioner "remote-exec" {
@@ -151,7 +151,7 @@ resource "terraform_data" "rabbitmq" {
 
     provisioner "file" {
         source = "bootstrap.sh"
-        destination = "/tmp/bootstrap.sh/"
+        destination = "/tmp/bootstrap.sh"
         }
 
     provisioner "remote-exec" {
