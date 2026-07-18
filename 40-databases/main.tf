@@ -84,7 +84,7 @@ resource "terraform_data" "redis" {
     ami = data.aws_ami.DevOps.id
     instance_type = "t3.micro"
     vpc_security_group_ids = [local.mysql_sg_id]
-    subnet_id = local.database_subnet_ids[0]
+    subnet_id = local.database_subnet_ids
     
     
     tags = merge(
