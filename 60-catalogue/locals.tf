@@ -3,7 +3,7 @@ locals {
     ami = data.aws_ami.DevOps.id
     common_name = "${var.project}-${var.environment}"
     private_subnet_ids = split(",", data.aws_ssm_parameter.private_subnet_ids.value)[0]
-    vpc_id = "/${var.project}/${var.environment}/vpc_id"
+    vpc_id = data.aws_ssm_parameter.vpc_id
     common_tags ={
         Project = "${var.project}"
         Environment = "${var.environment}"
