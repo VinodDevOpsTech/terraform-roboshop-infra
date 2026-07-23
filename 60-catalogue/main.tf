@@ -157,6 +157,22 @@ target_tracking_configuration {
     }
 }
     
+resource "aws_lb_listener_rule" "host_based_weighted_routing" {
+    listener_arn = local.backend_alb_listener_arn
+    priority     = 10
+
+    action {
+        type             = "forward"
+        target_group_arn = aws_lb_target_group.catalogue.arn
+    }
+
+    condition {
+        host_header {
+        values = ["catalogue.backend-alb-${var.environment}.${var.domain_name}"]
+        }
+    }
+    }
+
 
 
 
