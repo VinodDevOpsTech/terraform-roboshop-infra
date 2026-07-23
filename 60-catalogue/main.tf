@@ -173,7 +173,7 @@ resource "aws_lb_listener_rule" "host_based_weighted_routing" {
     }
     }
 
-    resource "terraform_data" "catalogue" {
+    resource "terraform_data" "catalogue-delete" {
     triggers_replace = [
         aws_instance.catalogue.id,
     ]
