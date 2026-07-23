@@ -123,7 +123,16 @@ resource "aws_autoscaling_group" "catalogue" {
     }
     vpc_zone_identifier       = [local.private_subnet_ids]
     target_group_arns = [aws_lb_target_group.catalogue.arn]
-
+    instance_refresh {
+    strategy = "Rolling"
+    preferences {
+        min_healthy_percentage = 50
+    }
+    triggers = ["launch_template"]
+    }
+    timeouts {
+        delete = "15m"
+    }
     dynamic "tag" {
         for_each = merge(
             {
@@ -138,9 +147,7 @@ resource "aws_autoscaling_group" "catalogue" {
             propagate_at_launch = true
         }
     }
-    timeouts {
-        delete = "15m"
-    }
+
 }
 
 resource "aws_autoscaling_policy" "catalogue" {
