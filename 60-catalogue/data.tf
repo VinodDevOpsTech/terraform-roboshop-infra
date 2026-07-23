@@ -12,6 +12,10 @@ data "aws_ssm_parameter" "vpc_id" {
     name = "/roboshop/dev/vpc_id"
 }
 
+data "aws_ssm_parameter" "backend_alb_listener" {
+    name = "/${var.project}/${var.environment}/backend_alb_listener_arn"
+}
+
 data "aws_ami" "DevOps" {
     most_recent      = true
     owners           = ["973714476881"]
