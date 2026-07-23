@@ -173,6 +173,18 @@ resource "aws_lb_listener_rule" "host_based_weighted_routing" {
     }
     }
 
+    resource "terraform_data" "catalogue" {
+    triggers_replace = [
+        aws_instance.catalogue.id,
+    ]
+    depends_on = [ aws_autoscaling_policy.catalogue ]
+
+    provisioner "local-exec" {
+        command = "aws ec2 terminate-instances --instance-ids ${aws_instance.catalogue.id}"
+    }
+    }
+
+
 
 
 
