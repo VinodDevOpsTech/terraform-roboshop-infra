@@ -168,7 +168,7 @@ resource "aws_lb_listener_rule" "host_based_weighted_routing" {
 
     condition {
         host_header {
-        values = ["catalogue.backend-alb-${var.environment}.${var.domain_name}"]
+        values = ["catalogue.backend_alb-${var.environment}.${var.domain_name}"]
         }
     }
     }
