@@ -1,4 +1,4 @@
-resource "aws_ssm_parameter" "frontend_alb_listener_arn" {
+resource "aws_ssm_parameter" "alb_listener" {
     name  = "/${var.project}/${var.environment}/frontend_alb_listener_arn"
     type  = "String"
     value = aws_lb_listener.https.arn
